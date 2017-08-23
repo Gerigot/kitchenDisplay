@@ -23,12 +23,6 @@ const styleSheet = {
   container: {
     maxWidth: '100%',
   },
-  '@media (min-width: 1024px)': {
-    container: {
-      display: 'flex',
-      alignItems: 'center',
-    }
-  }
 }
 
 class App extends Component {

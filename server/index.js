@@ -7,7 +7,7 @@ var test = require('./test');
 var util = require('./util');
 
 const app = express();
-
+var info = undefined;
 const broadcastToAll = (info = test.fakeInfo) => {
   wss.clients.forEach((socket) => {
     if (socket.readyState === 1) socket.send(JSON.stringify(info));
@@ -29,7 +29,8 @@ app.get('/test/start', (req, res) => {
 })
 
 app.post('/data', (req, res) => {
-  broadcastToAll(util.createFormattedArray(req.body.data));
+  info = util.createFormattedArray(req.body.data);
+  broadcastToAll(info);
   res.send(req.body);
 })
 
@@ -46,5 +47,5 @@ wss.on('connection', function connection(ws, req) {
   ws.on('close', (code, reason) => {
     console.log("ws closed: ", code, "reason: ", reason);
   })
-  broadcastToAll();
+  broadcastToAll(info);
 });
