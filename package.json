@@ -1,0 +1,26 @@
+{
+  "name": "prova",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "classnames": "^2.2.5",
+    "express": "^4.15.4",
+    "install": "^0.10.1",
+    "nodemon": "^1.11.0",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1",
+    "react-jss": "^7.1.0",
+    "react-scripts": "1.0.10",
+    "react-websocket": "^1.1.7",
+    "reset-css": "^2.2.1",
+    "ws": "^3.1.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "server": "nodemon --watch server server/index.js"
+  }
+}

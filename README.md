@@ -1,0 +1,1 @@
+# App to visualize a sended message to a client 
