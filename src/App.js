@@ -16,13 +16,19 @@ const styleSheet = {
     '*': {
       boxSizing: 'border-box',
     },
-    body:{
+    body: {
       padding: '0px 4px',
     }
   },
   container: {
     maxWidth: '100%',
   },
+  '@media screen and (min-width:680px)': {
+    container: {
+      flexWrap: 'wrap',
+      display: 'flex',
+    }
+  }
 }
 
 class App extends Component {
@@ -32,15 +38,16 @@ class App extends Component {
     this.state = { list: [] };
   }
   handleData(data) {
+    if (!data || data.size === 0) return;
     const message = JSON.parse(data);
     this.setState({ list: message });
   }
   render() {
-    const wsUrl = 'ws://'+window.location.hostname+':8080/websocket';
+    const wsUrl = 'ws://' + window.location.hostname + ':8080/websocket';
     const { classes } = this.props;
     return (
       <div className="App" onClick={this.toggleVisible}>
-        <Title className={classes.title}/>
+        <Title className={classes.title} />
         <div className={classes.container}>{
           this.state.list.map(({ title, value, color }) => (
             <ElementFood key={title} name={title} value={value} color={color} />

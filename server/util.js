@@ -8,7 +8,7 @@ exports.createFormattedArray = (data) => {
             console.log(index);
             object['color'] = colorArr[index];
         } else if (index % 2 === 1) {
-            object['value'] = value;
+            object['value'] = parseInt(value);
             arr.push(Object.assign({}, object));
         }
     })

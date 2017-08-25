@@ -1,23 +1,22 @@
+var util = require('./util');
+
 var interval;
 
-var fakeInfo = [
-    { title: "Costine", value: 0, color: 'blue' },
-    { title: "Luganighetta", value: 0, color: 'red' },
-    { title: "Filetto", value: 0, color: 'yellow' }
-]
+var fakeInfo = [];
 
 const getRandom = () => {
     return Math.ceil((Math.random() * 10 % 3));
 }
 
-exports.fakeInfo = fakeInfo
 
+var data = "Costine,0,Luganighetta,2,Filetto,3,Bue,5,patatine fritte,2";
 exports.startTest = (broadcastToAll) => {
     if (interval) clearInterval(interval);
+    fakeInfo = util.createFormattedArray(data);
     interval = setInterval(() => {
         let i = getRandom() - 1;
         fakeInfo[i].value = fakeInfo[i].value + getRandom();
-        broadcastToAll();
+        broadcastToAll(fakeInfo);
     }, 2000);
 }
 

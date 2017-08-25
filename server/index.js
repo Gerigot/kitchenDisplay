@@ -8,7 +8,7 @@ var util = require('./util');
 
 const app = express();
 var info = undefined;
-const broadcastToAll = (info = test.fakeInfo) => {
+const broadcastToAll = (info) => {
   wss.clients.forEach((socket) => {
     if (socket.readyState === 1) socket.send(JSON.stringify(info));
   })

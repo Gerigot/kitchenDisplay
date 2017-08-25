@@ -30,7 +30,19 @@ const styleSheet = {
         minWidth: '5ch',
         width: '100%',
         textAlign: 'center',
-        position: 'relative',        
+        position: 'relative',
+    },
+    '@media screen and (min-width:1024px)': {
+        container: {
+            maxWidth: '32%',
+            width: '32%',
+        }
+    },
+    '@media screen and (min-width:680px) and (max-width:1023px)': {
+        container: {
+            maxWidth: '48%',
+            width: '48%',
+        }
     }
 }
 
