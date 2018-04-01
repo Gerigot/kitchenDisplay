@@ -47,14 +47,15 @@ class App extends Component {
     const { classes } = this.props;
     return (
       <div className="App" onClick={this.toggleVisible}>
-        <Title className={classes.title} />
-        <div className={classes.container}>{
+        <Title className={classNames(classes.title)} />
+        <div className={classNames(classes.container)}>{
           this.state.list.map(({ title, value, color }) => (
             <ElementFood key={title} name={title} value={value} color={color} />
           ))
         }</div>
         <Websocket url={wsUrl}
-          onMessage={this.handleData.bind(this)} />
+          onMessage={this.handleData.bind(this)}
+           />
       </div>
     );
   }

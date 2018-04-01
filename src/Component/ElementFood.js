@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import injectSheet from 'react-jss'
 import classNames from 'classnames';
 import Popup from './Popup';
