@@ -12,7 +12,7 @@ const styleSheet = {
         textAlign: 'center',
         right: '50%',
         transform: 'translateX(50%)',
-        fontSize:'1rem',
+        fontSize: '1rem',
         margin: 0,
         opacity: '0',
         padding: 5,
@@ -52,22 +52,12 @@ const styleSheet = {
 class Popup extends Component {
     constructor(props) {
         super(props);
-        this.state = { diff: 0, isDiff: false }
     }
 
-    componentWillReceiveProps(nextProps) {
-        const diff = nextProps.value - this.props.value;
-        if (diff > 0) {
-            this.setState({ diff, isDiff: true })
-        } else {
-            this.setState({ diff: 0, isDiff: false })
-        }
-    }
     render() {
         const { props, state } = this;
-        const { isDiff, diff } = state;
-        const { value, classes } = props;
-        return <p key={'keyPopup' + value} className={classNames(classes.diff, { [classes.diffMoveDisappear]: isDiff })}>
+        const { diff, classes } = props;
+        return <p key={'keyPopup' + diff} className={classNames(classes.diff, { [classes.diffMoveDisappear]: diff })}>
             <span className={classes.span}>{diff}</span>
         </p>
     }

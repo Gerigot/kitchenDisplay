@@ -47,5 +47,8 @@ wss.on('connection', function connection(ws, req) {
   ws.on('close', (code, reason) => {
     console.log("ws closed: ", code, "reason: ", reason);
   })
+  ws.on('error', function error(error){
+    console.log("error: ---> ", error)
+  })
   broadcastToAll(info);
 });

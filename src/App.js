@@ -35,12 +35,24 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.handleData = this.handleData.bind(this);
+    this.getList = this.getList.bind(this)
     this.state = { list: [] };
   }
   handleData(data) {
     if (!data || data.size === 0) return;
     const message = JSON.parse(data);
-    this.setState({ list: message });
+    this.setState({ list: this.getList(message) });
+  }
+  getList(message){
+    console.log(message)
+    if(!message) return []; 
+    return message.map(({title, value, color}, index)=>{
+      if(this.state.list[index] && this.state.list[index].value !== value){
+        return {title, color, value, diff: value - this.state.list[index].value}
+      }else{
+        return {title, color, value}
+      }
+    })
   }
   render() {
     const wsUrl = 'ws://' + window.location.hostname + ':8080/websocket';
@@ -49,8 +61,8 @@ class App extends Component {
       <div className="App" onClick={this.toggleVisible}>
         <Title className={classNames(classes.title)} />
         <div className={classNames(classes.container)}>{
-          this.state.list.map(({ title, value, color }) => (
-            <ElementFood key={title} name={title} value={value} color={color} />
+          this.state.list.map(({ title, value, color, diff }) => (
+            <ElementFood key={title} name={title} value={value} color={color} diff={diff} />
           ))
         }</div>
         <Websocket url={wsUrl}

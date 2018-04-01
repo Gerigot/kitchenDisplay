@@ -48,12 +48,12 @@ const styleSheet = {
 const ElementFood = (props) => {
     const { classes } = props;
     let nameProdotto = "Esempio";
-    const { value, name } = props;
+    const { value, name, diff } = props;
     nameProdotto = name || nameProdotto;
     return <div className={classes.container}>
         <div className={classNames(classes.font, classes.name)}>{nameProdotto}</div>
         <div className={classNames(classes.font, classes.value)}>{value}
-            <Popup value={value} />
+            <Popup diff={diff} />
         </div>
     </div>
 }
