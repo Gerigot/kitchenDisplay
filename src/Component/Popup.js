@@ -5,27 +5,29 @@ import injectSheet from 'react-jss'
 
 const styleSheet = {
     diff: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
         position: 'absolute',
-        top: '0.2em',
-        minWidth: '3ch',
-        minHeight: '3ch',
+        top: '0',
+        right: '20%',
+        minWidth: '2em',
+        minHeight: '2em',
         textAlign: 'center',
-        right: '50%',
-        transform: 'translateX(50%)',
         fontSize: '1rem',
         margin: 0,
         opacity: '0',
         padding: 5,
         borderRadius: '25px',
         color: '#ffffff',
-        background: 'linear-gradient(45deg, rgba(0,0,255,1) 0%, rgba(0,0,255,.8) 50%, rgba(0,0,255,.6) 100%)',
+        background: 'linear-gradient(45deg, rgba(0,0,55,1) 0%, rgba(0,0,55,.8) 50%, rgba(0,0,55,.6) 100%)',
         '&:before': {
             content: "'+'",
             verticalAlign: 'middle',
         },
     },
     diffMoveDisappear: {
-        animation: 'moveAnimation 1s linear 0s 1, disappearAnimation 1s linear 0s 1'
+        animation: 'moveAnimation .5s linear 0s 1, disappearAnimation .5s linear 0s 1'
     },
     span: {
         display: 'inline-block',
@@ -33,10 +35,10 @@ const styleSheet = {
     },
     '@keyframes moveAnimation': {
         from: {
-            top: '.5em',
+            top: '0',
         },
         to: {
-            top: '-3em',
+            top: '-4em',
         }
     },
     '@keyframes disappearAnimation': {
