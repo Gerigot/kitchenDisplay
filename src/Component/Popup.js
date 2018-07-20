@@ -50,12 +50,9 @@ const styleSheet = {
 }
 
 class Popup extends Component {
-    constructor(props) {
-        super(props);
-    }
 
     render() {
-        const { props, state } = this;
+        const { props } = this;
         const { diff, classes } = props;
         return <p key={'keyPopup' + diff} className={classNames(classes.diff, { [classes.diffMoveDisappear]: diff })}>
             <span className={classes.span}>{diff}</span>
