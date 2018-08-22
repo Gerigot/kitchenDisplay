@@ -55,7 +55,7 @@ class App extends Component {
     })
   }
   render() {
-    const wsUrl = 'ws://' + window.location.hostname + ':8080/websocket';
+    const wsUrl = 'ws://' + window.location.host + '/websocket';
     const { classes } = this.props;
     return (
       <div className="App" onClick={this.toggleVisible}>
