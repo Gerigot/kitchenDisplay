@@ -24,7 +24,7 @@ class Charts extends Component {
                 let data = json[0].data;
                 this.setState({
                     nameList: data.map(value => { return value.title }),
-                    data
+                    data:json
                 })
             }
         })

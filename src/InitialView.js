@@ -30,33 +30,7 @@ class InitialView extends Component {
         this.handleData = this.handleData.bind(this);
         this.getList = this.getList.bind(this)
         this.state = {
-            list: [
-                {
-                    "title": "Costine",
-                    "color": "red",
-                    "value": 0
-                },
-                {
-                    "title": "Luganighetta",
-                    "color": "blue",
-                    "value": 3
-                },
-                {
-                    "title": "Filetto",
-                    "color": "yellow",
-                    "value": 3
-                },
-                {
-                    "title": "Bue",
-                    "color": "green",
-                    "value": 5
-                },
-                {
-                    "title": "patatine fritte",
-                    "color": "red",
-                    "value": 2
-                }
-            ]
+            list: []
         };
     }
     handleData(data) {
@@ -75,7 +49,7 @@ class InitialView extends Component {
             }
         })
     }
-    render(){
+    render() {
         const wsUrl = 'ws://' + window.location.host + '/websocket';
         const { classes } = this.props
         return <div>
