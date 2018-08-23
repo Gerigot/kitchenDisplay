@@ -1,20 +1,18 @@
 exports.createFormattedArray = (data) => {
-    var arr = [];
-    const colorArr = ["red", "", "blue", "", "yellow", "", "green", "", "red", "", "blue", "", "yellow", "", "green", "", "red", "", "blue", "", "yellow", "", "green"]
+    const colorArr = ["red", "blue",  "yellow", "green"]
     var object = {};
-    let prova = data.split(',');
-    console.log(prova);
-    for(let i = 0; i < prova.length; i+=2 ){
-        arr.push({title: prova[i], color: colorArr[i], value: parseInt(prova[i+1])})
-    }
-    // data.split(',').forEach((value, index) => {
-    //     if (index % 2 === 0) {
-    //         object['title'] = value;
-    //         object['color'] = colorArr[index];
-    //     } else if (index % 2 === 1) {
-    //         object['value'] = parseInt(value);
-    //         arr.push(Object.assign({}, object));
-    //     }
-    // })
-    return arr;
+    let dataArr = data.split(',');
+    
+    let corr = dataArr.reduce((prev, current, index) => {
+        if(index % 2 === 0){
+            return [...prev, [current]];
+        }else{
+            return [...prev.slice(0, prev.length-1), [...prev[prev.length -1], current]]
+        }
+    }, [])
+
+    const createObject = arr => arr.reduce((prev, current, index)=>{
+        return [...prev, {title: current[0], color: colorArr[index%4], value: parseInt(current[1])}]
+    }, []);
+    return createObject(corr)
 }

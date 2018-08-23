@@ -1,74 +1,56 @@
 import React, { Component } from 'react';
 import classNames from 'classnames';
-import Websocket from 'react-websocket';
-import ElementFood from './Component/ElementFood';
 import injectSheet from 'react-jss'
 import Title from './Component/Title';
+import { HashRouter as Router, Route, Link } from "react-router-dom";
+import InitialView from './InitialView';
+import ChartButton from './Component/ChartButton';
+
 
 const styleSheet = {
   title: {
     fontSize: '3em',
-    width: '100%',
     height: '25vh',
     textAlign: 'center',
+    position: "relative",
   },
-  '@global': {
-    '*': {
-      boxSizing: 'border-box',
-    },
-    body: {
-      padding: '0px 4px',
-    }
+  rootTitle: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexGrow: 1,
   },
-  container: {
-    maxWidth: '100%',
+  titleDiv: {
+    display: 'flex',
+    alignItems: 'center',
   },
-  '@media screen and (min-width:680px)': {
-    container: {
-      flexWrap: 'wrap',
-      display: 'flex',
-    }
+  link: {
+    position: 'absolute',
+    top: 0,
+    bottom: 0,
+    left: 0,
+    right: 0,
   }
 }
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-    this.handleData = this.handleData.bind(this);
-    this.getList = this.getList.bind(this)
-    this.state = { list: [] };
-  }
-  handleData(data) {
-    if (!data || data.size === 0) return;
-    const message = JSON.parse(data);
-    this.setState({ list: this.getList(message) });
-  }
-  getList(message){
-    console.log(message)
-    if(!message) return []; 
-    return message.map(({title, value, color}, index)=>{
-      if(this.state.list[index] && this.state.list[index].value !== value){
-        return {title, color, value, diff: value - this.state.list[index].value}
-      }else{
-        return {title, color, value}
-      }
-    })
-  }
+
   render() {
-    const wsUrl = 'ws://' + window.location.host + '/websocket';
     const { classes } = this.props;
     return (
-      <div className="App" onClick={this.toggleVisible}>
-        <Title className={classNames(classes.title)} />
-        <div className={classNames(classes.container)}>{
-          this.state.list.map(({ title, value, color, diff }) => (
-            <ElementFood key={title} name={title} value={value} color={color} diff={diff} />
-          ))
-        }</div>
-        <Websocket url={wsUrl}
-          onMessage={this.handleData.bind(this)}
-           />
-      </div>
+      <Router>
+        <div className="App" >
+          <div className={classes.titleDiv}>
+            <Title rootClassName={classes.rootTitle} className={classNames(classes.title)}>
+              <Link to="/" className={classes.link} />
+            </Title>
+            <ChartButton className={classes.chartButton}>
+              <Link to="/charts" className={classes.link} />
+            </ChartButton>
+          </div>
+          <Route exact path="/" component={InitialView} />
+        </div>
+      </Router>
     );
   }
 }

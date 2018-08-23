@@ -5,11 +5,12 @@ const path = require('path');
 var bodyParser = require('body-parser');
 var test = require('./test');
 var util = require('./util');
-var daoData = require('./mongodb/daoData')
+var daoData = require('./mongodb/daoData').default
 
 const app = express();
 var info = undefined;
 const broadcastToAll = (info) => {
+  if (info) daoData.inserisci(info);
   wss.clients.forEach((socket) => {
     if (socket.readyState === 1) socket.send(JSON.stringify(info));
   })
@@ -17,7 +18,7 @@ const broadcastToAll = (info) => {
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json());
-app.use(express.static(path.join(__dirname,'..', 'build')))
+app.use(express.static(path.join(__dirname, '..', 'build')))
 
 app.get('/test/stop', (req, res) => {
   test.stopTest();
@@ -34,11 +35,10 @@ app.post('/data', (req, res) => {
   broadcastToAll(info);
   res.send(req.body);
 })
-app.get("/prova", (req, res) => {
-  daoData.getData().then(value => {
-    conosle.log(value);
+app.get("/getAll", (req, res) => {
+  daoData.all().then(value => {
+    res.send(value);
   })
-  res.send(value);
 })
 
 var server = http.createServer(app);
@@ -54,8 +54,18 @@ wss.on('connection', function connection(ws, req) {
   ws.on('close', (code, reason) => {
     console.log("ws closed: ", code, "reason: ", reason);
   })
-  ws.on('error', function error(error){
-    console.log("error: ---> ", error)
+  ws.on('error', function error(error) {
+    console.log("error: --> ", error)
   })
-  broadcastToAll(info);
+  if(!info){
+    daoData.getLast().then(value => {
+      console.log(value, value.data);
+      if(value && value.data && value.data.length > 0){
+        info = value.data;
+        broadcastToAll(info);
+      };
+    }) 
+  }else{
+    broadcastToAll(info);
+  }
 });

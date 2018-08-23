@@ -2,6 +2,7 @@
   "name": "prova",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://localhost:8080",
   "dependencies": {
     "body-parser": "^1.18.3",
     "classnames": "^2.2.6",
@@ -11,6 +12,7 @@
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
     "react-jss": "^8.6.1",
+    "react-router-dom": "^4.3.1",
     "react-scripts": "^1.1.1",
     "react-websocket": "^2.0.0",
     "reset-css": "^4.0.1",
