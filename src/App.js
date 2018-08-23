@@ -5,6 +5,7 @@ import Title from './Component/Title';
 import { HashRouter as Router, Route, Link } from "react-router-dom";
 import InitialView from './InitialView';
 import ChartButton from './Component/ChartButton';
+import Charts from './Charts';
 
 
 const styleSheet = {
@@ -12,9 +13,9 @@ const styleSheet = {
     fontSize: '3em',
     height: '25vh',
     textAlign: 'center',
-    position: "relative",
   },
   rootTitle: {
+    position: "relative",
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
@@ -49,6 +50,7 @@ class App extends Component {
             </ChartButton>
           </div>
           <Route exact path="/" component={InitialView} />
+          <Route path="/charts" component={Charts} />
         </div>
       </Router>
     );
