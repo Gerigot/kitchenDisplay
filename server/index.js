@@ -5,6 +5,7 @@ const path = require('path');
 var bodyParser = require('body-parser');
 var test = require('./test');
 var util = require('./util');
+var daoData = require('./mongodb/daoData')
 
 const app = express();
 var info = undefined;
@@ -32,6 +33,12 @@ app.post('/data', (req, res) => {
   info = util.createFormattedArray(req.body.data);
   broadcastToAll(info);
   res.send(req.body);
+})
+app.get("/prova", (req, res) => {
+  daoData.getData().then(value => {
+    conosle.log(value);
+  })
+  res.send(value);
 })
 
 var server = http.createServer(app);
