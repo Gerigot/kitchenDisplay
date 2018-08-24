@@ -24,11 +24,18 @@ class DaoData {
     }
     getLast(){
         if (this.collection) {
-            return this.collection.findOne({}).catch((err) => {
+            return this.collection.find({}).sort("date", -1).toArray().then(array => {
+                return new Promise((res, reject) => {
+                    if(array && array.length > 0){
+                        res(array[0])
+                    }
+                    res({});
+                })
+            }).catch((err) => {
                 console.log(err)
             });
         }else{
-            return new Promise();
+            return new Promise((res, reject) => {res({})});
         }
     }
 
@@ -37,6 +44,8 @@ class DaoData {
             return this.collection.find({}).sort("date", 1).toArray().catch((err) => {
                 console.log(err)
             });
+        }else{
+            return new Promise((res, reject) => {res({})});
         }
     }
 }

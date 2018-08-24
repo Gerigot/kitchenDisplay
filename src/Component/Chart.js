@@ -3,12 +3,15 @@ import React from 'react';
 import ReactChartkick, { ColumnChart } from 'react-chartkick';
 import injectSheet from 'react-jss';
 import { formatDataForCharts } from '../Utils';
+import ChartTypeTitle from './ChartTypeTitle';
 
 ReactChartkick.addAdapter(Chartjs)
 
 const styleSheet = {
 
-    root: {}
+    chart: {
+        margin: '0px 5px'
+    }
 
 }
 
@@ -16,10 +19,10 @@ const Chart = (props) => {
     const { classes, match: { params: { type } }, list } = props;
     let formattedData = formatDataForCharts(list, type);
     console.log("formattedDate", formattedData);
-    if(!formattedData) return null;
+    if (!formattedData) return null;
     return <div>
-        {type}
-        <ColumnChart data={[formattedData]} />
+        <ChartTypeTitle label={type} />
+        <ColumnChart className={classes.chart} data={[...formattedData]} />
     </div>
 };
 

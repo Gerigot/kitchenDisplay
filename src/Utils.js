@@ -15,47 +15,37 @@ export const formatDataForCharts = (data, type) => {
             firstDate = setMinutes(firstDate, 0);
         }
         var i = 0;
-
-        return data.reduce((prev, cur, index) => {
+        var res = []
+        var prec = [];
+        data.sort((a, b) => a.date - b.date).forEach(element => {
             let thirtyplus = addMinutes(firstDate, 30);
-            if (prev.length === 0) {
-                return [getLabel(firstDate, thirtyplus), getNumByType(type, cur.data)]
-            } else {
-                let date = new Date(cur.date)
-                if (isWithinRange(date, firstDate, thirtyplus)) {
-                    let newarr = [...prev];
-                    newarr[i + 1] += getNumByType(type, cur.data);
-                    return newarr;
-                } else {
-                    let intermediate = addAndControl(date, firstDate, thirtyplus, cur, type);
-                    firstDate = intermediate.firstDate;
-                    i+=2;
-                    return [...prev, ...intermediate.list]
-                }
+            let num = getNumByType(type, element.data)
+            if(num === undefined)return
+            console.log(element);
+            if (!isWithinRange(new Date(element.date), firstDate, thirtyplus)) {
+                firstDate = new Date(thirtyplus.getTime());
+                i++;
             }
-        }, [])
+            prec[i] = num;
+            console.log("num", num, prec);
+            if (i > 0) {
+                num = num - prec[i - 1]
+            }
+            res[i] = [getLabel(firstDate, thirtyplus), num]
+        });
+        return res
     }
 
 }
 
-function addAndControl(date, firstDate, thirtyplus, cur, type) {
-    firstDate = new Date(thirtyplus.getTime());
-    thirtyplus = addMinutes(firstDate, 30);
-    if (isWithinRange(date, firstDate, thirtyplus)) {
-        //console.log(getLabel(firstDate, thirtyplus))
-        return { firstDate, list: [getLabel(firstDate, thirtyplus), getNumByType(type, cur.data)] };
-    } else {
-        //console.log(format(firstDate, "HH:mm"))
-        if (isFuture(firstDate)) return [];
-        return addAndControl(date, firstDate, thirtyplus, cur, type)
-    }
-}
+
 
 
 function getLabel(first, after) {
     return `${format(first, "H:mm")} - ${format(after, "H:mm")}`;
 }
 function getNumByType(type, list) {
+    if (!Array.isArray(list)) return undefined
     return list.find(curr => {
         return type === curr.title
     }).value

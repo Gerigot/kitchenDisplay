@@ -40,6 +40,11 @@ app.get("/getAll", (req, res) => {
     res.send(value);
   })
 })
+app.get("/getLast", (req, res) => {
+  daoData.getLast().then(value => {
+    res.send(value);
+  })
+})
 
 var server = http.createServer(app);
 server.listen(8080, function () {
@@ -57,15 +62,10 @@ wss.on('connection', function connection(ws, req) {
   ws.on('error', function error(error) {
     console.log("error: --> ", error)
   })
-  if(!info){
-    daoData.getLast().then(value => {
-      console.log(value, value.data);
-      if(value && value.data && value.data.length > 0){
-        info = value.data;
-        broadcastToAll(info);
-      };
-    }) 
-  }else{
-    broadcastToAll(info);
-  }
+  daoData.getLast().then(value => {
+    console.log(value, value.data);
+    if (value && value.data && value.data.length > 0) {
+      ws.send(ws.send(JSON.stringify(value.data)));
+    }
+  })
 });

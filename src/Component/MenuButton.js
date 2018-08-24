@@ -6,8 +6,13 @@ import classNames from 'classnames';
 const styleSheet = {
     root: {
         position: 'relative',
-        backgroundColor: '#4CAF50',
-        flex: '1 1 3em' 
+        backgroundColor: '#00bcd4',
+        flex: '1 1 3em',
+        fontSize: '1.5em',
+        padding: 5,
+        borderLeft: '0px solid',
+        borderRight: '1px solid',
+        textAlign: 'center',
     },
     link: {
         position: 'absolute',
