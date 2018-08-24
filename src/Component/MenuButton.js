@@ -7,7 +7,7 @@ const styleSheet = {
     root: {
         position: 'relative',
         backgroundColor: '#00bcd4',
-        flex: '1 1 3em',
+        flexBasis: '3em',
         fontSize: '1.5em',
         padding: 5,
         borderLeft: '0px solid',

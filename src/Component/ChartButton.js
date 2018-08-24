@@ -5,8 +5,8 @@ import classNames from 'classnames';
 const styleSheet = {
 
     root: {
-        width: '3em',
-        height: '3em',
+        width: '2em',
+        height: '2em',
         position: 'relative',
     },
     icon: {

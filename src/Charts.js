@@ -8,7 +8,7 @@ import Chart from './Component/Chart';
 const styleSheet = {
     root: {
         display: 'flex',
-        justifyContent: 'space-around',
+        flexWrap: 'wrap',
     }
 
 }
@@ -16,7 +16,7 @@ const styleSheet = {
 class Charts extends Component {
     constructor(props) {
         super(props);
-        this.state = { nameList: [], data: [] };
+        this.state = { nameList: ["fdsa", "flkdsja", "lfkdjas", "fdkljsa", "flkdasj", "fdlksajlkjs", "fksdjaljf"], data: [] };
     }
     componentDidMount() {
         fetch("/getAll").then(result => result.json()).then(json => {
@@ -27,7 +27,7 @@ class Charts extends Component {
                     data:json
                 })
             }
-        })
+        }).catch(err=>{})
     }
     render() {
         const { classes } = this.props;

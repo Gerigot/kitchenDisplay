@@ -3,7 +3,9 @@ const MongoClient = require('mongodb').MongoClient;
 
 class DaoData {
     constructor() {
-        var url = 'mongodb://localhost:27017/example'
+
+        var url = process.env.MONGOURL || 'mongodb://localhost:27017/example'
+        console.log("connect to url", url)
         const connect = (mongoclient) => {
             this.db = mongoclient.db("example");
             this.collection = this.db.collection("order");

@@ -11,7 +11,7 @@ import Charts from './Charts';
 const styleSheet = {
   title: {
     fontSize: '3em',
-    height: '25vh',
+    height: '20vh',
     textAlign: 'center',
   },
   rootTitle: {
