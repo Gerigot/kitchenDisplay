@@ -10,7 +10,7 @@ class DaoData {
             this.db = mongoclient.db("example");
             this.collection = this.db.collection("order");
         }
-        MongoClient.connect(url)
+        MongoClient.connect(url, { useNewUrlParser: true, useUnifiedTopology: true })
             .then(connect)
             .catch(function (err) {
                 console.log(err);
@@ -24,11 +24,11 @@ class DaoData {
             });
         }
     }
-    getLast(){
+    getLast() {
         if (this.collection) {
             return this.collection.find({}).sort("date", -1).toArray().then(array => {
                 return new Promise((res, reject) => {
-                    if(array && array.length > 0){
+                    if (array && array.length > 0) {
                         res(array[0])
                     }
                     res({});
@@ -36,8 +36,8 @@ class DaoData {
             }).catch((err) => {
                 console.log(err)
             });
-        }else{
-            return new Promise((res, reject) => {res({})});
+        } else {
+            return new Promise((res, reject) => { res({}) });
         }
     }
 
@@ -46,8 +46,8 @@ class DaoData {
             return this.collection.find({}).sort("date", 1).toArray().catch((err) => {
                 console.log(err)
             });
-        }else{
-            return new Promise((res, reject) => {res({})});
+        } else {
+            return new Promise((res, reject) => { res({}) });
         }
     }
 }

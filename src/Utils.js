@@ -1,8 +1,7 @@
-import isWithinRange from 'date-fns/is_within_range';
-import getMinutes from 'date-fns/get_minutes'
-import setMinutes from 'date-fns/set_minutes';
-import getHours from 'date-fns/get_hours';
-import { addMinutes, format, isFuture, setSeconds } from 'date-fns';
+import isWithinInterval from 'date-fns/isWithinInterval';
+import getMinutes from 'date-fns/getMinutes'
+import setMinutes from 'date-fns/setMinutes';
+import { addMinutes, format, setSeconds } from 'date-fns';
 
 export const formatDataForCharts = (data, type) => {
     if (data && data.length > 1) {
@@ -22,7 +21,7 @@ export const formatDataForCharts = (data, type) => {
             let num = getNumByType(type, element.data)
             if(num === undefined)return
             console.log(element);
-            if (!isWithinRange(new Date(element.date), firstDate, thirtyplus)) {
+            if (!isWithinInterval(new Date(element.date), firstDate, thirtyplus)) {
                 firstDate = new Date(thirtyplus.getTime());
                 i++;
             }

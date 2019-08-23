@@ -1,7 +1,6 @@
 import React from 'react';
 import injectSheet from 'react-jss'
 import { Link } from "react-router-dom";
-import classNames from 'classnames';
 
 const styleSheet = {
     root: {

@@ -11,7 +11,7 @@ const styleSheet = {
         padding: '.3em 1em',
         margin: '0px 5px 10px 5px',
         border: '1px solid black',
-        background: props => 'linear-gradient(45deg, ' + props.color + ' 0%, #ffffff 100%)',
+        background: props => `linear-gradient(45deg, #ffffff 0%,${props.color} 100%)`,
         alignItems: 'baseline',
         maxWidth: '100%',
         borderRadius: '25px',
