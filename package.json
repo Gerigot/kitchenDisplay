@@ -20,7 +20,7 @@
     "react-scripts": "^4.0.0",
     "react-websocket": "^2.1.0",
     "reset-css": "^5.0.1",
-    "ws": "^7.4.0"
+    "ws": "^7.4.5"
   },
   "scripts": {
     "start": "react-scripts start",
