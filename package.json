@@ -8,7 +8,7 @@
     "chart.js": "^2.9.4",
     "classnames": "^2.2.6",
     "date-fns": "^2.16.1",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "jest": "^26.6.0",
     "mongodb": "^3.6.3",
     "nodemon": "^2.0.6",
